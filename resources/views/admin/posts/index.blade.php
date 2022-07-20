@@ -35,13 +35,13 @@
                                 <span class="badge badge-pill badge-secondary">Bozza</span>
                             @endif
                         </td>
-                        <td>
-                            <a href="{{route('admin.posts.show', $post->id)}}" class="btn btn-primary">Visualizza</a>
-                            <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-warning">Modifica</a>
+                        <td class="d-flex justify-content-center">
+                            <a href="{{route('admin.posts.show', $post->id)}}" class="btn btn-primary mx-2">Visualizza</a>
+                            <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-warning mx-2">Modifica</a>
                             <form action="{{route('admin.posts.destroy', $post->id)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Cancella</button>
+                                <button type="submit" class="btn btn-danger mx-2">Cancella</button>
                             </form>
                         </td>                    
                     </tr>
