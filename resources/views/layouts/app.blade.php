@@ -34,7 +34,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link" href="{{route('admin.posts.index')}}">Posts</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('admin.categories.index')}}">Posts</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('admin.categories.index')}}">Categorie</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

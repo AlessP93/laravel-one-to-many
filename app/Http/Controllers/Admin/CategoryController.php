@@ -16,7 +16,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -59,9 +61,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        return view('admin.categories.show', compact('category'));
     }
 
     /**
@@ -70,9 +72,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -82,9 +84,21 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        // validazione
+        $request->validate([
+            'name' => "required|string|max:100|unique:categories,name,{$category->id}",
+        ]);
+        $data = $request->all();
+        
+        // aggiornamento
+        $category->name = $data['name'];
+        $category->slug = Str::of($category->name)->slug('-');
+        $category->save();
+
+        // redirect alla pagina con tutte le categorie
+        return redirect()->route('admin.categories.index');
     }
 
     /**
@@ -93,8 +107,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        // redirect alla pagina con tutte le categorie
+        return redirect()->route('admin.categories.index');
     }
 }
